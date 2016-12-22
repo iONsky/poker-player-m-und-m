@@ -13,9 +13,14 @@ class Player {
     console.log("Rank 1 - " + cardOne.rank);
     console.log("Rank 2 - " + cardTwo.rank);
 
+    var value = checkCards(cardOne, cardTwo);
+    console.log("Value " + value);
+
     var cardOnIsHigh = false;
     var cardTwoIsHigh = false;
     var hasOneHighCard = false;
+    var isPair = false;
+    var isHighPair = false;
 
     if(cardOne.rank === "A" || cardOne.rank === "K" || cardOne.rank === "Q" || cardOne.rank === "J" || cardOne.rank === "10") {
       hasOneHighCard = true;
@@ -25,6 +30,13 @@ class Player {
     if(cardTwo.rank === "A" || cardTwo.rank === "K" || cardTwo.rank === "Q" || cardTwo.rank === "J" || cardTwo.rank === "10") {
       hasOneHighCard = true;
       cardTwoIsHigh = true;
+    }
+
+    if(cardOne.rank === cardTwo.rank) {
+      isPair = true;
+      if(cardOne.rank === "A" || cardOne.rank === "K" || cardOne.rank === "Q" || cardOne.rank === "J" || cardOne.rank === "10") {
+        isHighPair = true;
+      }
     }
 
     if(cardOnIsHigh && cardTwoIsHigh && gameState.bet_index <= 10) {
@@ -42,6 +54,41 @@ class Player {
   }
 
   static showdown(gameState) {
+  }
+
+  static checkCards(cardOne, cardTwo) {
+    var oneHighCard = false;
+    var twoHighCards = false;
+    var anyPair = false;
+    var highPair = false;
+
+    var value = "";
+
+    if(cardOne.rank === "A" || cardOne.rank === "K" || cardOne.rank === "Q" || cardOne.rank === "J" || cardOne.rank === "10") {
+      oneHighCard = true;
+      value = "oneHighCard";
+    }
+
+    if(cardTwo.rank === "A" || cardTwo.rank === "K" || cardTwo.rank === "Q" || cardTwo.rank === "J" || cardTwo.rank === "10") {
+      if(oneHighCard) {
+        twoHighCards = true;
+        value = "twoHighCards";
+      } else {
+        oneHighCard = true;
+        value = "oneHighCard";
+      }
+    }
+
+    if(cardOne.rank === cardTwo.rank) {
+      anyPair = true;
+      value = "anyPair";
+      if(oneHighCard) {
+        highPair = true;
+        value = "highPair";
+      }
+    }
+
+    return value;
   }
 }
 
