@@ -6,15 +6,10 @@ class Player {
   static betRequest(gameState) {
     var bet = gameState.current_buy_in;
     console.log("player " + gameState.players[0].id + gameState.players[0].name);
-    for (var player in gameState.players) {
-      console.log("player " + player.id + player.name);
-      if(player.name === "M und M") {
-        for (var card in player.hole_cards) {
-          console.log("Card " + card.rank);
-            if(card.rank === "A" || card.rank === "K" || card.rank === "Q" || card.rank === "J" || card.rank === "10") {
-              bet += 10;
-            }
-        }
+    for (var card in gameState.players[0].hole_cards) {
+      console.log("Card " + card.rank);
+      if(card.rank === "A" || card.rank === "K" || card.rank === "Q" || card.rank === "J" || card.rank === "10") {
+        bet += 10;
       }
     }
     console.log("Bet " + bet);
