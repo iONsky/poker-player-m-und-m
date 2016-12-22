@@ -16,7 +16,7 @@ class Player {
       }
     }
     console.log(gameState.current_buy_in);
-    return gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
+    return 100;//gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
   }
 
   static showdown(gameState) {
