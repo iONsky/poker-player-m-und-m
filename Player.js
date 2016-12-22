@@ -129,7 +129,9 @@ class Player {
   static checkCommunityCards(cardOne, cardTwo, communityCards) {
     var anyPair = false;
     var highPair = false;
-    var twoPairOrTriple = false;
+    var twoPair = false;
+    var triple = false;
+    var lastPairCard = "";
     var value = "";
 
     for (var index in communityCards) {
@@ -137,9 +139,13 @@ class Player {
 
       //Pärchen
       if(card.rank === cardOne.rank || card.rank === cardTwo.rank) {
+        if(anyPair) {
 
-        anyPair = true
-        value = "anyPair";
+        } else {
+          anyPair = true
+          value = "anyPair";
+          lastPairCard = card.rank;
+      }
 
         // High Pärchen
         if(card.rank === "A" || card.rank === "K" || card.rank === "Q" || card.rank === "J" || card.rank === "10") {
@@ -150,6 +156,29 @@ class Player {
 
 
     }
+
+    return value;
+  }
+
+  static checkForSameCards(cards) {
+    var value = 0;
+    var cardsCountDict = {};
+    for (var index in cards) {
+      var rank = cards[index].rank;
+      if(rank in cardsCountDict) {
+        cardsCountDict[rank] += 1;
+      } else {
+        cardsCountDict[rank] = 1;
+      }
+    }
+
+    console.log(cardsCountDict);
+    // for (var index in cardsCountDict) {
+    //   var count = cardsCountDict[index];
+    //   if(count > 0 && count > value) {
+    //     value = count;
+    //   }
+    // }
 
     return value;
   }
