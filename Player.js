@@ -114,7 +114,7 @@ class Player {
       bet = "ultraMinimumRaise";
     }
 
-    if(hand === "twoHighCards" && betIndex <= 5) {
+    if(hand === "twoHighCards" && betIndex <= 5 && !sameSuit) {
       bet = "minimumRaise";
     }
 
@@ -122,8 +122,8 @@ class Player {
       bet = "ultraMinimumRaise";
     }
 
-    if(hand === "twoHighCards" && betIndex > 6 && betIndex <= 20 && sameSuit) {
-      bet = "ultraMinimumRaise";
+    if(hand === "twoHighCards" && sameSuit && betIndex <= 15) {
+      bet = "aggressiveRaise";
     }
 
     if(hand === "anyPair" && betIndex <= 5) {
