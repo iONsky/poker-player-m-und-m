@@ -35,11 +35,6 @@ class Player {
     console.log("Round " + gameState.round);
     console.log("Betting Index " + gameState.bet_index);
 
-    var cards = gameState.community_cards;
-    cards.push(cardOne, cardTwo);
-    var sameCard = Player.checkForSameCards(cards);
-    console.log("sameCard " + sameCard);
-
     return bet;//gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
   }
 
@@ -139,28 +134,42 @@ class Player {
     var triple = false;
     var lastPairCard = "";
     var value = "";
+    var onHand = false;
+    var highCard = false;
 
-    for (var index in communityCards) {
-      var card = communityCards[index];
+    var cards = communityCards
+    cards.push(cardOne, cardTwo);
+    var sameCard = Player.checkForSameCards(cards);
+    console.log("sameCard rank" + sameCard.rank);
+    console.log("sameCard count" + sameCard.count);
 
-      //Pärchen
-      if(card.rank === cardOne.rank || card.rank === cardTwo.rank) {
-        if(anyPair) {
+    if(sameCard.rank === cardOne.rank || sameCard.rank === cardTwo.rank) {
+      onHand = true;
+    }
 
-        } else {
-          anyPair = true
-          value = "anyPair";
-          lastPairCard = card.rank;
+    if(sameCard.rank === "A" || sameCard.rank === "K" || sameCard.rank === "Q" || sameCard.rank === "J" || sameCard.rank === "10") {
+        highCard = true;
+    }
+
+    if(sameCard.count == 2 && onHand) {
+      value = "anyPair";
+      if(highCard) {
+        value = "highPair";
       }
+    }
 
-        // High Pärchen
-        if(card.rank === "A" || card.rank === "K" || card.rank === "Q" || card.rank === "J" || card.rank === "10") {
-          highPair = true;
-          value = "highPair";
-        }
+    if(sameCard.count == 3 && onHand) {
+      value = "anyTriple";
+      if(highCard) {
+        value = "highTriple";
       }
+    }
 
-
+    if(sameCard.count == 4 && onHand) {
+      value = "anyQuad";
+      if(highCard) {
+        value = "highQuad";
+      }
     }
 
     return value;
