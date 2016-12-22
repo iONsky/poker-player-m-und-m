@@ -24,7 +24,7 @@ class Player {
     console.log("ValueCC " + valueCC);
     console.log("sameSuit " + sameSuit);
 
-    var betValue = betBeforeFlop(hand, sameSuit, gameState.bet_index);
+    var betValue = Player.betBeforeFlop(hand, sameSuit, gameState.bet_index);
 
     if(betValue === "check") {
       bet = check;
@@ -44,6 +44,8 @@ class Player {
 
   static showdown(gameState) {
   }
+
+
 
   static betBeforeFlop(hand, sameSuit, betIndex) {
     let bet = "fold";
