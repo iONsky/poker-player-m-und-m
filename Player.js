@@ -37,8 +37,8 @@ class Player {
 
     var cards = gameState.community_cards;
     cards.push(cardOne, cardTwo);
-    var sameCards = Player.checkForSameCards(cards);
-    console.log("sameCards " + sameCards);
+    var sameCard = Player.checkForSameCards(cards);
+    console.log("sameCard " + sameCard);
 
     return bet;//gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
   }
@@ -167,7 +167,7 @@ class Player {
   }
 
   static checkForSameCards(cards) {
-    var value = 0;
+    var card = {"rank": "", "count": 0};
     var cardsCountDict = {};
     for (var index in cards) {
       var rank = cards[index].rank;
@@ -179,15 +179,16 @@ class Player {
     }
 
     // console.log(cardsCountDict);
-    for (var index in cardsCountDict) {
-      var count = cardsCountDict[index];
+    for (var rank in cardsCountDict) {
+      var count = cardsCountDict[rank];
 
-      if(count > 0 && count > value) {
-        value = count;
+      if(count > 0 && count > card.count) {
+        card.rank = rank;
+        card.count = count;
       }
     }
 
-    return value;
+    return card;
   }
 
   static checkCardsRank(cardOne, cardTwo) {
