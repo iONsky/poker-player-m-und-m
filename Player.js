@@ -34,6 +34,9 @@ class Player {
     console.log("Bet " + bet);
     console.log("Round " + gameState.round);
     console.log("Betting Index " + gameState.bet_index);
+
+    Player.checkForSameCards(gameState.community_cards);
+
     return bet;//gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
   }
 
