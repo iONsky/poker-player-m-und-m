@@ -14,11 +14,11 @@ class Player {
     console.log("Rank 2 - " + cardTwo.rank);
 
     if(cardOne.rank === "A" || cardOne.rank === "K" || cardOne.rank === "Q" || cardOne.rank === "J" || cardOne.rank === "10") {
-      bet += 10;
+      bet += gameState.minimum_raise;
     }
 
     if(cardTwo.rank === "A" || cardTwo.rank === "K" || cardTwo.rank === "Q" || cardTwo.rank === "J" || cardTwo.rank === "10") {
-      bet += 10;
+      bet += gameState.minimum_raise;
     }
     /*for (var card in gameState.players[0].hole_cards) {
       console.log("Card " + );
