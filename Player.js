@@ -35,7 +35,10 @@ class Player {
     console.log("Round " + gameState.round);
     console.log("Betting Index " + gameState.bet_index);
 
-    Player.checkForSameCards(gameState.community_cards);
+    var cards = gameState.community_cards;
+    cards.push(cardOne, cardTwo);
+    var sameCards = Player.checkForSameCards(cards);
+    console.log("sameCards " + sameCards);
 
     return bet;//gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
   }
@@ -178,10 +181,10 @@ class Player {
     // console.log(cardsCountDict);
     for (var index in cardsCountDict) {
       var count = cardsCountDict[index];
-      console.log(count);
-      // if(count > 0 && count > value) {
-      //   value = count;
-      // }
+
+      if(count > 0 && count > value) {
+        value = count;
+      }
     }
 
     return value;
