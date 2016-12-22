@@ -16,6 +16,7 @@ class Player {
       }
     }
     console.log("Test" + gameState.current_buy_in);
+    console.log("Cards" + gameState.players[0]);
     return 100;//gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
   }
 
