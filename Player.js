@@ -4,6 +4,7 @@ class Player {
   }
 
   static betRequest(gameState) {
+    var bet = 0;
     for (var player in gameState.players) {
       if(player.name === "M und M") {
 
@@ -16,7 +17,7 @@ class Player {
       }
     }
 
-    return gameStae.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
+    return gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
   }
 
   static showdown(gameState) {
