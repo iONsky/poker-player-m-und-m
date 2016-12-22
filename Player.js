@@ -16,14 +16,11 @@ class Player {
 
     console.log("Rank 1 - " + cardOne.rank);
     console.log("Rank 2 - " + cardTwo.rank);
-    console.log("CC " + gameState.community_cards.length);
-    for (var index in gameState.community_cards) {
-      var card = gameState.community_cards[index];
-      console.log("CC _ " + card.rank);
-    }
+
 
     var value = Player.checkCardsRank(cardOne, cardTwo);
     var sameSuit = Player.checkCardsSuit(cardOne, cardTwo);
+    var valueCC = Player.checkCommunityCards(cardOne, cardTwo, gameState.community_cards);
 
     console.log("Value " + value);
     console.log("sameSuit " + sameSuit);
@@ -71,6 +68,23 @@ class Player {
   }
 
   static showdown(gameState) {
+  }
+
+  static checkCommunityCards(cardOne, cardTwo, communityCards) {
+    var anyPair = false;
+    var value = "";
+
+    for (var index in communityCards) {
+      var card = gameState.community_cards[index];
+
+      //Pärchen
+      if(card.rank === cardOne.rank || card.rank === cardTwo.rank) {
+        anyPair = true
+        value = "anyPair";
+      }
+    }
+
+    return value;
   }
 
   static checkCardsRank(cardOne, cardTwo) {
