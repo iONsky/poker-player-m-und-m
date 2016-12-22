@@ -27,11 +27,9 @@ class Player {
       bet = Player.getBet(gameState, betValue);
     } else {
       console.log("afterFlop");
-      var betValue = Player.betAfterFlop(hand, sameSuit, gameState.bet_index);
+      var betValue = Player.betAfterFlop(valueCC, sameSuit, gameState.bet_index);
       bet = Player.getBet(gameState, betValue);
     }
-
-
 
     console.log("Bet " + bet);
     console.log("Round " + gameState.round);
