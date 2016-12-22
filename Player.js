@@ -46,8 +46,10 @@ class Player {
     var check = 0;
     var ultraMinimumRaise = gameState.current_buy_in;
     var minimumRaise = gameState.current_buy_in + gameState.minimum_raise;
+    var normalRaise = gameState.current_buy_in + gameState.minimum_raise * 1.5;
     var aggressiveRaise = gameState.current_buy_in + gameState.minimum_raise * 2;
     var superAggressiveRaise = gameState.current_buy_in + gameState.minimum_raise * 4;
+    var superMegaAggressiveRaise = gameState.current_buy_in + gameState.minimum_raise * 8;
 
     if(betValue === "check") {
       bet = check;
@@ -55,10 +57,14 @@ class Player {
       bet = ultraMinimumRaise;
     } else if(betValue === "minimumRaise") {
       bet = minimumRaise;
+    } else if(betValue === "normalRaise") {
+      bet = normalRaise;
     } else if(betValue === "aggressiveRaise") {
       bet = aggressiveRaise;
     } else if(betValue === "superAggressiveRaise") {
       bet = superAggressiveRaise;
+    } else if(betValue === "superMegaAggressiveRaise") {
+      bet = superMegaAggressiveRaise;
     }
 
     return bet;
@@ -128,12 +134,7 @@ class Player {
   }
 
   static checkCommunityCards(cardOne, cardTwo, communityCards) {
-    var anyPair = false;
-    var highPair = false;
-    var twoPair = false;
-    var triple = false;
-    var lastPairCard = "";
-    var value = "";
+    var value = "check";
     var onHand = false;
     var highCard = false;
 
