@@ -37,7 +37,7 @@ class Player {
     }
 
     if(value === "anyPair" && gameState.bet_index > 5 && gameState.bet_index <= 10) {
-      bet = raise;
+      bet = minimumRaise;
     }
 
     if(value === "highPair" && gameState.bet_index <= 5) {
