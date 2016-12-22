@@ -4,7 +4,16 @@ class Player {
   }
 
   static betRequest(gameState) {
-    
+    for (var player in gameState.player) {
+      if(player.name === "M und M") {
+        for (var card in player.hole_cards) {
+            if(card.rank === "A") {
+              return 10;
+            }
+        }
+      }
+    }
+
     return 0;
   }
 
