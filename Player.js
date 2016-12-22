@@ -18,12 +18,16 @@ class Player {
     console.log("Rank 2 - " + cardTwo.rank);
 
     var value = Player.checkCardsRank(cardOne, cardTwo);
-    var sameSuite = Player.checkCardsSuite(cardOne, cardTwo);
+    var sameSuit = Player.checkCardsSuit(cardOne, cardTwo);
 
     console.log("Value " + value);
-    console.log("sameSuite " + sameSuite);
+    console.log("sameSuit " + sameSuit);
 
     if(value === "oneHighCard" && gameState.bet_index <= 5) {
+      bet = check;
+    }
+
+    if(value === "oneHighCard" && gameState.bet_index > 5 && sameSuit) {
       bet = check;
     }
 
@@ -31,7 +35,11 @@ class Player {
       bet = minimumRaise;
     }
 
-    if(value === "twoHighCards" && gameState.bet_index > 6 && gameState.bet_index <= 10) {
+    if(value === "twoHighCards" && gameState.bet_index > 6 && gameState.bet_index <= 10 && !sameSuit) {
+      bet = check;
+    }
+
+    if(value === "twoHighCards" && gameState.bet_index > 6 && sameSuit) {
       bet = check;
     }
 
@@ -95,7 +103,7 @@ class Player {
     return value;
   }
 
-  static checkCardsSuite(cardOne, cardTwo) {
+  static checkCardsSuit(cardOne, cardTwo) {
     return cardOne.suit === cardTwo.suit;
   }
 }
