@@ -16,51 +16,25 @@ class Player {
     console.log("Rank 2 - " + cardTwo.rank);
     console.log("CC " + gameState.community_cards.length);
 
-    var value = Player.checkCardsRank(cardOne, cardTwo);
+    var hand = Player.checkCardsRank(cardOne, cardTwo);
     var sameSuit = Player.checkCardsSuit(cardOne, cardTwo);
     var valueCC = Player.checkCommunityCards(cardOne, cardTwo, gameState.community_cards);
 
-    console.log("Value " + value);
+    console.log("hand " + hand);
     console.log("ValueCC " + valueCC);
     console.log("sameSuit " + sameSuit);
 
-    if(value === "oneHighCard" && gameState.bet_index <= 5) {
-      bet = check;
-    }
+    var betValue = betBeforeFlop(hand, sameSuit, gameState.bet_index);
 
-    if(value === "oneHighCard" && gameState.bet_index > 5 && sameSuit) {
+    if(betValue === "check") {
       bet = check;
-    }
-
-    if(value === "twoHighCards" && gameState.bet_index <= 5) {
+    } else if(betValue === "minimumRaise") {
       bet = minimumRaise;
-    }
-
-    if(value === "twoHighCards" && gameState.bet_index > 6 && gameState.bet_index <= 10 && !sameSuit) {
-      bet = check;
-    }
-
-    if(value === "twoHighCards" && gameState.bet_index > 6 && sameSuit) {
-      bet = check;
-    }
-
-    if(value === "anyPair" && gameState.bet_index <= 5) {
+    } else if(betValue === "aggressiveRaise") {
       bet = aggressiveRaise;
-    }
-
-    if(value === "anyPair" && gameState.bet_index > 5 && gameState.bet_index <= 10) {
-      bet = minimumRaise;
-    }
-
-    if(value === "highPair" && gameState.bet_index <= 5) {
+    } else if(betValue === "superAggressiveRaise") {
       bet = superAggressiveRaise;
     }
-
-    if(value === "highPair" && gameState.bet_index > 5) {
-      bet = aggressiveRaise;
-    }
-
-
 
     console.log("Bet " + bet);
     console.log("Round " + gameState.round);
@@ -69,6 +43,47 @@ class Player {
   }
 
   static showdown(gameState) {
+  }
+
+  static betBeforeFlop(hand, sameSuit, betIndex) {
+    let bet = "fold";
+    if(hand === "oneHighCard" && betIndex <= 5) {
+      bet = "check";
+    }
+
+    if(hand === "oneHighCard" && betIndex > 5 && sameSuit) {
+      bet = "check";
+    }
+
+    if(hand === "twoHighCards" && betIndex <= 5) {
+      bet = "minimumRaise";
+    }
+
+    if(hand === "twoHighCards" && betIndex > 6 && betIndex <= 10 && !sameSuit) {
+      bet = "check";
+    }
+
+    if(hand === "twoHighCards" && betIndex > 6 && sameSuit) {
+      bet = "check";
+    }
+
+    if(hand === "anyPair" && betIndex <= 5) {
+      bet = "aggressiveRaise";
+    }
+
+    if(hand === "anyPair" && betIndex > 5 && betIndex <= 10) {
+      bet = "minimumRaise";
+    }
+
+    if(hand === "highPair" && betIndex <= 5) {
+      bet = "superAggressiveRaise";
+    }
+
+    if(hand === "highPair" && betIndex > 5) {
+      bet = "aggressiveRaise";
+    }
+
+    return bet;
   }
 
   static checkCommunityCards(cardOne, cardTwo, communityCards) {
