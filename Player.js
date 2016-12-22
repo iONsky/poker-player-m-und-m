@@ -27,7 +27,7 @@ class Player {
       cardTwoIsHigh = true;
     }
 
-    if(cardOnIsHigh && cardTwoIsHigh) {
+    if(cardOnIsHigh && cardTwoIsHigh && gameState.bet_index <= 10) {
       bet += gameState.current_buy_in + gameState.minimum_raise;
     } else if(hasOneHighCard && gameState.bet_index <= 5) {
       bet += gameState.current_buy_in;
