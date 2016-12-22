@@ -13,18 +13,23 @@ class Player {
     console.log("Rank 1 - " + cardOne.rank);
     console.log("Rank 2 - " + cardTwo.rank);
 
-    var hasOneHighCard = false
-
+    var cardOnIsHigh = false;
+    var cardTwoIsHigh = false;
+    var hasOneHighCard = false;
 
     if(cardOne.rank === "A" || cardOne.rank === "K" || cardOne.rank === "Q" || cardOne.rank === "J" || cardOne.rank === "10") {
-      hasOneHighCard = true
+      hasOneHighCard = true;
+      cardOnIsHigh = true;
     }
 
     if(cardTwo.rank === "A" || cardTwo.rank === "K" || cardTwo.rank === "Q" || cardTwo.rank === "J" || cardTwo.rank === "10") {
-      hasOneHighCard = true
+      hasOneHighCard = true;
+      cardTwoIsHigh = true;
     }
 
-    if(hasOneHighCard) {
+    if(cardOnIsHigh && cardTwoIsHigh) {
+      bet += gameState.current_buy_in + gameState.minimum_raise;
+    } else if(hasOneHighCard) {
       bet += gameState.current_buy_in;
     }
 
