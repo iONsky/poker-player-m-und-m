@@ -175,13 +175,14 @@ class Player {
       }
     }
 
-    console.log(cardsCountDict);
-    // for (var index in cardsCountDict) {
-    //   var count = cardsCountDict[index];
-    //   if(count > 0 && count > value) {
-    //     value = count;
-    //   }
-    // }
+    // console.log(cardsCountDict);
+    for (var index in cardsCountDict) {
+      var count = cardsCountDict[index];
+      console.log(count);
+      // if(count > 0 && count > value) {
+      //   value = count;
+      // }
+    }
 
     return value;
   }
