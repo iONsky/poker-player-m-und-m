@@ -9,9 +9,16 @@ class Player {
     console.log("Card 0" + gameState.players[0].hole_cards[0]);
     console.log("Card 0" + gameState.players[0].hole_cards[1]);
 
-    bet += shouldBet(gameState.players[0].hole_cards[0]);
-    bet += shouldBet(gameState.players[0].hole_cards[1]);
+    var cardOne = gameState.players[0].hole_cards[0];
+    var cardTwo = gameState.players[0].hole_cards[1]
 
+    if(cardOne.rank === "A" || cardOne.rank === "K" || cardOne.rank === "Q" || cardOne.rank === "J" || cardOne.rank === "10") {
+      bet += 10;
+    }
+
+    if(cardTwo.rank === "A" || cardTwo.rank === "K" || cardTwo.rank === "Q" || cardTwo.rank === "J" || cardTwo.rank === "10") {
+      bet += 10;
+    }
     /*for (var card in gameState.players[0].hole_cards) {
       console.log("Card " + );
       if(card.rank === "A" || card.rank === "K" || card.rank === "Q" || card.rank === "J" || card.rank === "10") {
@@ -23,14 +30,6 @@ class Player {
   }
 
   static showdown(gameState) {
-  }
-
-  function shouldBet(card) {
-    if(card.rank === "A" || card.rank === "K" || card.rank === "Q" || card.rank === "J" || card.rank === "10") {
-      return 10;
-    }
-
-    return 0;
   }
 }
 
