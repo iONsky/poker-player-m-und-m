@@ -6,6 +6,7 @@ class Player {
   static betRequest(gameState) {
     var bet = gameState.current_buy_in;
     for (var player in gameState.players) {
+      console.log("player " + player.id + player.name);
       if(player.name === "M und M") {
         for (var card in player.hole_cards) {
           console.log("Card " + card.rank);
