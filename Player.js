@@ -8,7 +8,7 @@ class Player {
       if(player.name === "M und M") {
         for (var card in player.hole_cards) {
             if(card.rank === "A" || card.rank === "K" || card.rank === "Q" || card.rank === "J" || card.rank === "10") {
-              return 10;
+              return gameState.current_buy_in;
             }
         }
       }
