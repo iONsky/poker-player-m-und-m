@@ -86,12 +86,12 @@ class Player {
   }
 
   static betBeforeFlop(hand, sameSuit, betIndex) {
-    let bet = "fold";
+    let bet = "check";
     if(hand === "oneHighCard" && betIndex <= 5) {
       bet = "ultraMinimumRaise";
     }
 
-    if(hand === "oneHighCard" && betIndex > 5 && sameSuit) {
+    if(hand === "oneHighCard" && betIndex > 5 && betIndex <= 15 && sameSuit) {
       bet = "ultraMinimumRaise";
     }
 
@@ -103,7 +103,7 @@ class Player {
       bet = "ultraMinimumRaise";
     }
 
-    if(hand === "twoHighCards" && betIndex > 6 && sameSuit) {
+    if(hand === "twoHighCards" && betIndex > 6 && betIndex <= 20 && sameSuit) {
       bet = "ultraMinimumRaise";
     }
 
@@ -129,6 +129,7 @@ class Player {
   static checkCommunityCards(cardOne, cardTwo, communityCards) {
     var anyPair = false;
     var highPair = false;
+    var twoPairOrTriple = false;
     var value = "";
 
     for (var index in communityCards) {
@@ -136,14 +137,18 @@ class Player {
 
       //Pärchen
       if(card.rank === cardOne.rank || card.rank === cardTwo.rank) {
+
         anyPair = true
         value = "anyPair";
 
+        // High Pärchen
         if(card.rank === "A" || card.rank === "K" || card.rank === "Q" || card.rank === "J" || card.rank === "10") {
           highPair = true;
           value = "highPair";
         }
       }
+
+
     }
 
     return value;
