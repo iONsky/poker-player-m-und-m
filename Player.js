@@ -13,7 +13,7 @@ class Player {
     console.log("Rank 1 - " + cardOne.rank);
     console.log("Rank 2 - " + cardTwo.rank);
 
-    var value = checkCards(cardOne, cardTwo);
+    var value = Player.checkCards(cardOne, cardTwo);
     console.log("Value " + value);
 
     var cardOnIsHigh = false;
