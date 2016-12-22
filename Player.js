@@ -7,7 +7,7 @@ class Player {
     for (var player in gameState.players) {
       if(player.name === "M und M") {
         for (var card in player.hole_cards) {
-            if(card.rank === "A") {
+            if(card.rank === "A" || card.rank === "K" || card.rank === "Q" || card.rank === "J") {
               return 10;
             }
         }
