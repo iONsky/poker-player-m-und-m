@@ -74,7 +74,7 @@ class Player {
     let bet = "check";
 
     if(hand === "anyPair" && betIndex <= 5) {
-      bet = "aggressiveRaise";
+      bet = "normalRaise";
     }
 
     if(hand === "anyPair" && betIndex > 5 && betIndex <= 10) {
@@ -85,8 +85,20 @@ class Player {
       bet = "superAggressiveRaise";
     }
 
-    if(hand === "highPair" && betIndex > 5) {
+    if(hand === "highPair" && betIndex > 5 && betIndex <= 10) {
       bet = "aggressiveRaise";
+    }
+
+    if(hand === "highPair" && betIndex > 10) {
+      bet = "superAggressiveRaise";
+    }
+
+    if(hand === "anyTriple") {
+      bet = "superAggressiveRaise";
+    }
+
+    if(hand === "anyQuad") {
+      bet = "superMegaAggressiveRaise";
     }
 
     return bet;
