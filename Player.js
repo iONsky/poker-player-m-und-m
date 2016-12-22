@@ -17,8 +17,9 @@ class Player {
     console.log("Rank 1 - " + cardOne.rank);
     console.log("Rank 2 - " + cardTwo.rank);
     console.log("CC " + gameState.community_cards.length);
-    for (var cc in gameState.community_cards) {
-      console.log("CC _ " + cc);
+    for (var index in gameState.community_cards) {
+      var card = gameState.community_cards[index];
+      console.log("CC _ " + card.rank);
     }
 
     var value = Player.checkCardsRank(cardOne, cardTwo);
