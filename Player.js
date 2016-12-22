@@ -6,7 +6,7 @@ class Player {
   static betRequest(gameState) {
     var bet = gameState.current_buy_in + gameState.minimum_raise;
     console.log("player " + gameState.players[0].id + gameState.players[0].name);
-
+    console.log("my bet" + gameState.players[0].bet);
     var cardOne = gameState.players[0].hole_cards[0];
     var cardTwo = gameState.players[0].hole_cards[1];
 
@@ -20,13 +20,13 @@ class Player {
     if(cardTwo.rank === "A" || cardTwo.rank === "K" || cardTwo.rank === "Q" || cardTwo.rank === "J" || cardTwo.rank === "10") {
       bet += gameState.minimum_raise;
     }
-    /*for (var card in gameState.players[0].hole_cards) {
-      console.log("Card " + );
-      if(card.rank === "A" || card.rank === "K" || card.rank === "Q" || card.rank === "J" || card.rank === "10") {
-        bet += 10;
-      }
-    }*/
+
+    gameState.players[gameState.in_action].forEach(function(card) {
+      console.log(card);
+    });
+
     console.log("Bet " + bet);
+    console.log("new Bet " + gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise)
     return bet;//gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
   }
 
