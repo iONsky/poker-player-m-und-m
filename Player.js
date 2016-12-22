@@ -96,7 +96,7 @@ class Player {
   }
 
   static checkCardsSuite(cardOne, cardTwo) {
-    return cardOne.suite === cardTwo.suite;
+    return cardOne.suit === cardTwo.suit;
   }
 }
 
