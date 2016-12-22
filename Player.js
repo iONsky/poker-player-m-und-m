@@ -42,13 +42,16 @@ class Player {
 
   static getBet(gameState, betValue) {
     var bet = 0;
-    var check = gameState.current_buy_in;
+    var check = 0;
+    var ultraMinimumRaise = gameState.current_buy_in;
     var minimumRaise = gameState.current_buy_in + gameState.minimum_raise;
     var aggressiveRaise = gameState.current_buy_in + gameState.minimum_raise * 2;
     var superAggressiveRaise = gameState.current_buy_in + gameState.minimum_raise * 4;
 
     if(betValue === "check") {
       bet = check;
+    } else if(betValue === "ultraMinimumRaise") {
+      bet = ultraMinimumRaise;
     } else if(betValue === "minimumRaise") {
       bet = minimumRaise;
     } else if(betValue === "aggressiveRaise") {
@@ -63,11 +66,11 @@ class Player {
   static betAfterFlop(hand, sameSuit, betIndex) {
     let bet = "fold";
     if(hand === "oneHighCard" && betIndex <= 5) {
-      bet = "check";
+      bet = "ultraMinimumRaise";
     }
 
     if(hand === "oneHighCard" && betIndex > 5 && sameSuit) {
-      bet = "check";
+      bet = "ultraMinimumRaise";
     }
 
     if(hand === "twoHighCards" && betIndex <= 5) {
@@ -75,11 +78,11 @@ class Player {
     }
 
     if(hand === "twoHighCards" && betIndex > 6 && betIndex <= 10 && !sameSuit) {
-      bet = "check";
+      bet = "ultraMinimumRaise";
     }
 
     if(hand === "twoHighCards" && betIndex > 6 && sameSuit) {
-      bet = "check";
+      bet = "ultraMinimumRaise";
     }
 
     if(hand === "anyPair" && betIndex <= 5) {
@@ -104,11 +107,11 @@ class Player {
   static betBeforeFlop(hand, sameSuit, betIndex) {
     let bet = "fold";
     if(hand === "oneHighCard" && betIndex <= 5) {
-      bet = "check";
+      bet = "ultraMinimumRaise";
     }
 
     if(hand === "oneHighCard" && betIndex > 5 && sameSuit) {
-      bet = "check";
+      bet = "ultraMinimumRaise";
     }
 
     if(hand === "twoHighCards" && betIndex <= 5) {
@@ -116,11 +119,11 @@ class Player {
     }
 
     if(hand === "twoHighCards" && betIndex > 6 && betIndex <= 10 && !sameSuit) {
-      bet = "check";
+      bet = "ultraMinimumRaise";
     }
 
     if(hand === "twoHighCards" && betIndex > 6 && sameSuit) {
-      bet = "check";
+      bet = "ultraMinimumRaise";
     }
 
     if(hand === "anyPair" && betIndex <= 5) {
