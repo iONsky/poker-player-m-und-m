@@ -21,10 +21,11 @@ class Player {
       bet += gameState.minimum_raise;
     }
 
-    gameState.players[gameState.in_action].forEach(function(card) {
-      console.log(card);
-    });
+    
 
+    for (var card in gameState.players[0].hole_cards) {
+      console.log("Card " + card);
+    }
     console.log("Bet " + bet);
     console.log("new Bet " + gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise)
     return bet;//gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
