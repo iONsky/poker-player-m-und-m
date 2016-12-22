@@ -5,6 +5,10 @@ class Player {
 
   static betRequest(gameState) {
     var bet = 0;
+    var check = gameState.current_buy_in;
+    var minimumRaise = gameState.current_buy_in + gameState.minimum_raise;
+    var aggressiveRaise = gameState.current_buy_in + gameState.minimum_raise * 2;
+    var superAggressiveRaise = gameState.current_buy_in + gameState.minimum_raise * 4;
     console.log("player " + gameState.players[0].id + gameState.players[0].name);
     console.log("my bet" + gameState.players[0].bet);
     var cardOne = gameState.players[0].hole_cards[0];
@@ -16,36 +20,33 @@ class Player {
     var value = Player.checkCards(cardOne, cardTwo);
     console.log("Value " + value);
 
-    var cardOnIsHigh = false;
-    var cardTwoIsHigh = false;
-    var hasOneHighCard = false;
-    var isPair = false;
-    var isHighPair = false;
-
-    if(cardOne.rank === "A" || cardOne.rank === "K" || cardOne.rank === "Q" || cardOne.rank === "J" || cardOne.rank === "10") {
-      hasOneHighCard = true;
-      cardOnIsHigh = true;
+    if(value === "oneHighCard" && gameState.bet_index <= 5) {
+      bet = check;
     }
 
-    if(cardTwo.rank === "A" || cardTwo.rank === "K" || cardTwo.rank === "Q" || cardTwo.rank === "J" || cardTwo.rank === "10") {
-      hasOneHighCard = true;
-      cardTwoIsHigh = true;
+    if(value === "twoHighCards" && gameState.bet_index <= 5) {
+      bet = minimumRaise;
     }
 
-    if(cardOne.rank === cardTwo.rank) {
-      isPair = true;
-      if(cardOne.rank === "A" || cardOne.rank === "K" || cardOne.rank === "Q" || cardOne.rank === "J" || cardOne.rank === "10") {
-        isHighPair = true;
-      }
+    if(value === "twoHighCards" && gameState.bet_index > 6 && gameState.bet_index <= 10) {
+      bet = check;
     }
 
-    if(cardOnIsHigh && cardTwoIsHigh && gameState.bet_index <= 10) {
-      bet += gameState.current_buy_in + gameState.minimum_raise;
-    } else if(hasOneHighCard && gameState.bet_index <= 5) {
-      bet += gameState.current_buy_in;
+    if(value === "anyPair" && gameState.bet_index <= 5) {
+      bet = aggressiveRaise;
     }
 
+    if(value === "anyPair" && gameState.bet_index > 5 && gameState.bet_index <= 10) {
+      bet = raise;
+    }
 
+    if(value === "highPair" && gameState.bet_index <= 5) {
+      bet = superAggressiveRaise;
+    }
+
+    if(value === "highPair" && gameState.bet_index > 5) {
+      bet = aggressiveRaise;
+    }
 
     console.log("Bet " + bet);
     console.log("Round " + gameState.round);
