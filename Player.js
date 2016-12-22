@@ -4,20 +4,19 @@ class Player {
   }
 
   static betRequest(gameState) {
-    var bet = 0;
+    var bet = gameState.current_buy_in;
     for (var player in gameState.players) {
       if(player.name === "M und M") {
         for (var card in player.hole_cards) {
-          //return gameState.current_buy_in + 23;
-            /*if(card.rank === "A" || card.rank === "K" || card.rank === "Q" || card.rank === "J" || card.rank === "10") {
-              return gameState.current_buy_in;
-            }*/
+          console.log("Card " + card.rank);
+            if(card.rank === "A" || card.rank === "K" || card.rank === "Q" || card.rank === "J" || card.rank === "10") {
+              bet += 10;
+            }
         }
       }
     }
-    console.log("Test " + gameState.current_buy_in);
-    console.log("Card " + gameState.players[0].hole_cards[0].rank);
-    return 100;//gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
+    console.log("Bet " + bet);
+    return bet;//gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
   }
 
   static showdown(gameState) {
