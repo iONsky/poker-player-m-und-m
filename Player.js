@@ -17,8 +17,11 @@ class Player {
     console.log("Rank 1 - " + cardOne.rank);
     console.log("Rank 2 - " + cardTwo.rank);
 
-    var value = Player.checkCards(cardOne, cardTwo);
+    var value = Player.checkCardsRank(cardOne, cardTwo);
+    var sameSuite = Player.checkCardsSuite(cardOne, cardTwo);
+
     console.log("Value " + value);
+    console.log("sameSuite " + sameSuite);
 
     if(value === "oneHighCard" && gameState.bet_index <= 5) {
       bet = check;
@@ -57,7 +60,7 @@ class Player {
   static showdown(gameState) {
   }
 
-  static checkCards(cardOne, cardTwo) {
+  static checkCardsRank(cardOne, cardTwo) {
     var oneHighCard = false;
     var twoHighCards = false;
     var anyPair = false;
@@ -90,6 +93,10 @@ class Player {
     }
 
     return value;
+  }
+
+  static checkCardsSuite(cardOne, cardTwo) {
+    return cardOne.suite === cardTwo.suite;
   }
 }
 
