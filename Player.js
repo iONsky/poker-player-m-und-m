@@ -4,7 +4,7 @@ class Player {
   }
 
   static betRequest(gameState) {
-    for (var player in gameState.player) {
+    for (var player in gameState.players) {
       if(player.name === "M und M") {
         for (var card in player.hole_cards) {
             if(card.rank === "A") {
