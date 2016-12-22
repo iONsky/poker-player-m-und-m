@@ -9,20 +9,18 @@ class Player {
     var minimumRaise = gameState.current_buy_in + gameState.minimum_raise;
     var aggressiveRaise = gameState.current_buy_in + gameState.minimum_raise * 2;
     var superAggressiveRaise = gameState.current_buy_in + gameState.minimum_raise * 4;
-    console.log("player " + gameState.players[0].id + gameState.players[0].name);
-    console.log("my bet" + gameState.players[0].bet);
     var cardOne = gameState.players[0].hole_cards[0];
     var cardTwo = gameState.players[0].hole_cards[1];
 
     console.log("Rank 1 - " + cardOne.rank);
     console.log("Rank 2 - " + cardTwo.rank);
 
-
     var value = Player.checkCardsRank(cardOne, cardTwo);
     var sameSuit = Player.checkCardsSuit(cardOne, cardTwo);
     var valueCC = Player.checkCommunityCards(cardOne, cardTwo, gameState.community_cards);
 
     console.log("Value " + value);
+    console.log("ValueCC " + valueCC);
     console.log("sameSuit " + sameSuit);
 
     if(value === "oneHighCard" && gameState.bet_index <= 5) {
@@ -61,6 +59,8 @@ class Player {
       bet = aggressiveRaise;
     }
 
+
+
     console.log("Bet " + bet);
     console.log("Round " + gameState.round);
     console.log("Betting Index " + gameState.bet_index);
@@ -75,7 +75,7 @@ class Player {
     var value = "";
 
     for (var index in communityCards) {
-      var card = gameState.community_cards[index];
+      var card = communityCards[index];
 
       //Pärchen
       if(card.rank === cardOne.rank || card.rank === cardTwo.rank) {
