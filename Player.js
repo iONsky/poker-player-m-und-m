@@ -6,8 +6,9 @@ class Player {
   static betRequest(gameState) {
     for (var player in gameState.players) {
       if(player.name === "M und M") {
+
         for (var card in player.hole_cards) {
-          return gameState.current_buy_in + 23;
+          //return gameState.current_buy_in + 23;
             /*if(card.rank === "A" || card.rank === "K" || card.rank === "Q" || card.rank === "J" || card.rank === "10") {
               return gameState.current_buy_in;
             }*/
@@ -15,7 +16,7 @@ class Player {
       }
     }
 
-    return 0;
+    return gameStae.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
   }
 
   static showdown(gameState) {
