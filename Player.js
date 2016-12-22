@@ -16,6 +16,7 @@ class Player {
 
     console.log("Rank 1 - " + cardOne.rank);
     console.log("Rank 2 - " + cardTwo.rank);
+    console.log("CC " + gameState.community_cards.length);
 
     var value = Player.checkCardsRank(cardOne, cardTwo);
     var sameSuit = Player.checkCardsSuit(cardOne, cardTwo);
