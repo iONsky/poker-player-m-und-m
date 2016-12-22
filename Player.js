@@ -21,8 +21,17 @@ class Player {
     console.log("ValueCC " + valueCC);
     console.log("sameSuit " + sameSuit);
 
-    var betValue = Player.betBeforeFlop(hand, sameSuit, gameState.bet_index);
-    bet = Player.getBet(gameState, betValue);
+    if(gameState.community_cards.length == 0) {
+      console.log("beforeFlop");
+      var betValue = Player.betBeforeFlop(hand, sameSuit, gameState.bet_index);
+      bet = Player.getBet(gameState, betValue);
+    } else {
+      console.log("afterFlop");
+      var betValue = Player.betAfterFlop(hand, sameSuit, gameState.bet_index);
+      bet = Player.getBet(gameState, betValue);
+    }
+
+
 
     console.log("Bet " + bet);
     console.log("Round " + gameState.round);
@@ -48,6 +57,47 @@ class Player {
       bet = aggressiveRaise;
     } else if(betValue === "superAggressiveRaise") {
       bet = superAggressiveRaise;
+    }
+
+    return bet;
+  }
+
+  static betAfterFlop(hand, sameSuit, betIndex) {
+    let bet = "fold";
+    if(hand === "oneHighCard" && betIndex <= 5) {
+      bet = "check";
+    }
+
+    if(hand === "oneHighCard" && betIndex > 5 && sameSuit) {
+      bet = "check";
+    }
+
+    if(hand === "twoHighCards" && betIndex <= 5) {
+      bet = "minimumRaise";
+    }
+
+    if(hand === "twoHighCards" && betIndex > 6 && betIndex <= 10 && !sameSuit) {
+      bet = "check";
+    }
+
+    if(hand === "twoHighCards" && betIndex > 6 && sameSuit) {
+      bet = "check";
+    }
+
+    if(hand === "anyPair" && betIndex <= 5) {
+      bet = "aggressiveRaise";
+    }
+
+    if(hand === "anyPair" && betIndex > 5 && betIndex <= 10) {
+      bet = "minimumRaise";
+    }
+
+    if(hand === "highPair" && betIndex <= 5) {
+      bet = "superAggressiveRaise";
+    }
+
+    if(hand === "highPair" && betIndex > 5) {
+      bet = "aggressiveRaise";
     }
 
     return bet;
