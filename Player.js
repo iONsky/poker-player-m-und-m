@@ -64,26 +64,7 @@ class Player {
   }
 
   static betAfterFlop(hand, sameSuit, betIndex) {
-    let bet = "fold";
-    if(hand === "oneHighCard" && betIndex <= 5) {
-      bet = "ultraMinimumRaise";
-    }
-
-    if(hand === "oneHighCard" && betIndex > 5 && sameSuit) {
-      bet = "ultraMinimumRaise";
-    }
-
-    if(hand === "twoHighCards" && betIndex <= 5) {
-      bet = "minimumRaise";
-    }
-
-    if(hand === "twoHighCards" && betIndex > 6 && betIndex <= 10 && !sameSuit) {
-      bet = "ultraMinimumRaise";
-    }
-
-    if(hand === "twoHighCards" && betIndex > 6 && sameSuit) {
-      bet = "ultraMinimumRaise";
-    }
+    let bet = "check";
 
     if(hand === "anyPair" && betIndex <= 5) {
       bet = "aggressiveRaise";
