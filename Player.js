@@ -5,10 +5,7 @@ class Player {
 
   static betRequest(gameState) {
     var bet = 0;
-    var check = gameState.current_buy_in;
-    var minimumRaise = gameState.current_buy_in + gameState.minimum_raise;
-    var aggressiveRaise = gameState.current_buy_in + gameState.minimum_raise * 2;
-    var superAggressiveRaise = gameState.current_buy_in + gameState.minimum_raise * 4;
+
     var cardOne = gameState.players[0].hole_cards[0];
     var cardTwo = gameState.players[0].hole_cards[1];
 
@@ -25,6 +22,23 @@ class Player {
     console.log("sameSuit " + sameSuit);
 
     var betValue = Player.betBeforeFlop(hand, sameSuit, gameState.bet_index);
+    bet = Player.getBet(gameState, betValue);
+
+    console.log("Bet " + bet);
+    console.log("Round " + gameState.round);
+    console.log("Betting Index " + gameState.bet_index);
+    return bet;//gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
+  }
+
+  static showdown(gameState) {
+  }
+
+  static getBet(gameState, betValue) {
+    var bet = 0;
+    var check = gameState.current_buy_in;
+    var minimumRaise = gameState.current_buy_in + gameState.minimum_raise;
+    var aggressiveRaise = gameState.current_buy_in + gameState.minimum_raise * 2;
+    var superAggressiveRaise = gameState.current_buy_in + gameState.minimum_raise * 4;
 
     if(betValue === "check") {
       bet = check;
@@ -36,16 +50,8 @@ class Player {
       bet = superAggressiveRaise;
     }
 
-    console.log("Bet " + bet);
-    console.log("Round " + gameState.round);
-    console.log("Betting Index " + gameState.bet_index);
-    return bet;//gameState.current_buy_in - gameState.players[gameState.in_action]["bet"] + gameState.minimum_raise;
+    return bet;
   }
-
-  static showdown(gameState) {
-  }
-
-
 
   static betBeforeFlop(hand, sameSuit, betIndex) {
     let bet = "fold";
