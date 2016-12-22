@@ -127,7 +127,7 @@ class Player {
     }
 
     if(hand === "anyPair" && betIndex <= 5) {
-      bet = "aggressiveRaise";
+      bet = "superMegaAggressiveRaise";
     }
 
     if(hand === "anyPair" && betIndex > 5 && betIndex <= 10) {
